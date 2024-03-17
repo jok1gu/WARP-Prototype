@@ -1,0 +1,33 @@
+[
+    {
+        "test_parameter": {
+            "loop count": {
+                "type": "int",
+                "value": [
+                    "2",
+                    "4",
+                    "3"
+                ]
+            },
+            "이름": {
+                "type": "string",
+                "value": [
+                    "asdf"
+                ]
+            },
+            "min": {
+                "type": "int",
+                "value": [
+                    "3"
+                ]
+            },
+            "max": {
+                "type": "int",
+                "value": [
+                    "6"
+                ]
+            }
+        },
+        "test_name": "test1.py"
+    }
+]

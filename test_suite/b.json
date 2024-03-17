@@ -1,0 +1,56 @@
+[
+    {
+        "test_parameter": {
+            "\uce21\uc815 \ud69f\uc218": {
+                "type": "int",
+                "value": "10"
+            },
+            "VBAT": {
+                "type": "int",
+                "value": "3"
+            },
+            "Load": {
+                "type": "float",
+                "value": "3"
+            },
+            "\uadf8\ub798\ud504 1\ubc88 \ub77c\ubca8": {
+                "type": "string",
+                "value": "a"
+            },
+            "\uadf8\ub798\ud504 2\ubc88 \ub77c\ubca8": {
+                "type": "string",
+                "value": "b"
+            },
+            "Vout": {
+                "type": "list",
+                "list": [
+                    "Min",
+                    "Typ",
+                    "Max"
+                ],
+                "value": "Min"
+            },
+            "Block": {
+                "type": "list",
+                "list": [
+                    "B1S1",
+                    "B1S2",
+                    "B1S3",
+                    "B2S1",
+                    "B2S2",
+                    "B2S3",
+                    "B3S1",
+                    "B3S2",
+                    "B3S3"
+                ],
+                "multi_select": true,
+                "value": [
+                    "B1S1",
+                    "B1S2",
+                    "B1S3"
+                ]
+            }
+        },
+        "test_name": "test2.py"
+    }
+]

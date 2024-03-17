@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restore State from JSON</title>
+</head>
+<body>
+    <div id="myDiv">
+        <label for="text">Text Input:</label>
+        <input type="text" id="text">
+
+        <label for="checkbox">Checkbox:</label>
+        <input type="checkbox" id="checkbox">
+
+        <label for="radio1">Radio 1:</label>
+        <input type="radio" id="radio1" name="radioGroup" value="radioOption1">
+        
+        <label for="radio2">Radio 2:</label>
+        <input type="radio" id="radio2" name="radioGroup" value="radioOption2">
+
+        <label for="singleSelect">Single Select:</label>
+        <select id="singleSelect">
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
+
+        <label for="multipleSelect">Multiple Select:</label>
+        <select id="multipleSelect" multiple>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
+
+        <button onclick="saveState()">Save State</button>
+        <button onclick="restoreState()">Restore State</button>
+    </div>
+
+    <div id="output"></div>
+
+    <script>
+        let savedState = null;
+
+        function saveState() {
+            const myDiv = document.getElementById('myDiv');
+            const inputs = myDiv.querySelectorAll('input, select');
+            const data = {};
+
+            inputs.forEach(input => {
+                const id = input.id;
+                if (input.type === 'checkbox') {
+                    data[id] = input.checked;
+                } else if (input.type === 'radio') {
+                    if (input.checked) {
+                        data[id] = input.value;
+                    }
+                } else if (input.type === 'select-one') {
+                    data[id] = input.value;
+                } else if (input.type === 'select-multiple') {
+                    const selectedOptions = Array.from(input.selectedOptions).map(option => option.value);
+                    data[id] = selectedOptions;
+                } else {
+                    data[id] = input.value;
+                }
+            });
+
+            savedState = JSON.stringify(data);
+            console.log(savedState);
+        }
+
+        function restoreState() {
+            if (savedState) {
+                const myDiv = document.getElementById('myDiv');
+                const inputs = myDiv.querySelectorAll('input, select');
+                const data = JSON.parse(savedState);
+
+                inputs.forEach(input => {
+                    const id = input.id;
+
+                    if (data.hasOwnProperty(id)) {
+                        if (input.type === 'checkbox' || input.type === 'radio') {
+                            input.checked = data[id];
+                        } else if (input.type === 'select-one') {
+                            input.value = data[id];
+                        } else if (input.type === 'select-multiple') {
+                            // Reset all options first
+                            Array.from(input.options).forEach(option => option.selected = false);
+
+                            // Set selected options based on saved state
+                            data[id].forEach(value => {
+                                const option = input.options.namedItem(value);
+                                console.log(value, option, input.options);
+                                if (option) {
+                                    option.selected = true;
+                                }
+                            });
+                        } else {
+                            input.value = data[id];
+                        }
+                    }
+                });
+            } else {
+                console.log('No saved state available.');
+            }
+        }
+
+        function handleDynamicDivChange(event) {
+            const target = event.target;
+
+            if (target.matches('input, select')) {
+                // input, checkbox, radio, select가 변경되었을 때만 처리
+                // saveState();
+            }
+        }
+
+        const myDiv = document.getElementById('myDiv');
+        
+        // 부모 요소에 이벤트 리스너 추가
+        myDiv.addEventListener('change', handleDynamicDivChange);
+
+        // 초기 출력
+        saveState();
+    </script>
+</body>
+</html>

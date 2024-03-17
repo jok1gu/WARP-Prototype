@@ -1,0 +1,23 @@
+[
+    {
+        "test_parameter": {
+            "loop count": {
+                "type": "int",
+                "value": "10"
+            },
+            "\uc774\ub984": {
+                "type": "string",
+                "value": "d"
+            },
+            "min": {
+                "type": "int",
+                "value": "1"
+            },
+            "max": {
+                "type": "int",
+                "value": "5"
+            }
+        },
+        "test_name": "test1.py"
+    }
+]
